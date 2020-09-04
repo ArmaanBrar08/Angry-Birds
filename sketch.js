@@ -1,54 +1,41 @@
-const Engine = Matter.Engine;
-const World= Matter.World;
-const Bodies = Matter.Bodies;
+var background;
+var gameState = 0;
+var form;
 
-var engine, world;
-var box1;
+function preload(){
+  backgroundIMG = loadImage("Images/Ocean.jpg");
+  thomasIMG = loadImage("Images/Thomas.png");
+  mrsmithIMG = loadImage("Images/MrSmith.png");
+  anchorIMG = loadImage("Images/Anchor.png");
+  foodIMG = loadImage("Images/Food.jpg");
+  waterIMG = loadImage("Images/Water.png");
+  shipIMG = loadImage("Images/Ship.png");
+}
 
 function setup(){
-    var canvas = createCanvas(1200, 400);
-    engine = Engine.create();
-    world = engine.world;
+  createCanvas(displayWidth, displayHeight)
+  thomas = createSprite(displayWidth - 750, displayHeight - 200, 20, 20);
+  thomas.addImage(thomasIMG);
+  thomas.scale = 0.5
+  mrSmith = createSprite(displayWidth - 900, displayHeight - 250, 20, 20);
+  mrSmith.addImage(mrsmithIMG);
+  mrSmith.scale = 0.4;
 
-    box1 = new Box(700, 320,70,70);
-    box2 = new Box(920, 320, 70, 70);
-    pig1 = new Pig(810, 350);
-    log1 = new Log(810, 260, 300, PI/2);
+  form = new Form();
 
-    box3 = new Box(700, 240, 70, 70);
-    box4 = new Box(920, 240, 70, 70);
-    pig2 = new Pig(810, 250);
-    log2 = new Log(810, 200, 300, PI/2);
 
-    box5 = new Box(810, 160, 70, 70);
-    log3 = new Log(760, 120, 150, PI/7);
-    log4 = new Log(870, 120, 150, -PI/7);
-
-    bird1 = new Bird(200, 200);
-
-    ground1 = new Ground(600, 380, 1200, 20);
 }
 
 function draw(){
-    background(0);
-    Engine.update(engine);
-    box1.display();
-    box2.display();
-    ground1.display();
-    pig1.display();
-    log1.display();
+  if(gameState === 0){
+    form.displayPlayButton();
+  }
 
-    box3.display();
-    box4.display();
-    pig2.display();
-    log2.display();
+  if(gameState === 1){
+    background(backgroundIMG);
+    drawSprites();
+    image(shipIMG, displayWidth - 1250, displayHeight - 500, 700, 550 );
+    
+  }
 
-    box5.display();
-    log3.display();
-    log4.display();
-
-    bird1.display();
-
-
-   
 }
